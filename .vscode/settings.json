@@ -1,11 +1,16 @@
 {
     "cSpell.words": [
         "autoflush",
+        "fastapi",
+        "healthcheck",
         "isouter",
+        "isready",
         "ondelete",
+        "pgdata",
         "postgress",
         "pycache",
         "sessionmaker",
+        "uvicorn",
         "venv"
     ]
 }

@@ -12,7 +12,6 @@ router = APIRouter(tags=["Posts"])
 @router.get("/posts", response_model=List[schemas.PostOut])
 def get_posts(
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(oauth2.get_current_user),
     limit: int = 10,
     skip: int = 0,
     search: str | None = None,
@@ -23,10 +22,7 @@ def get_posts(
         db.query(models.Post, func.count(models.Vote.post_id).label("votes"))
         .join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True)
         .group_by(models.Post.id)
-        .filter(
-            models.Post.user_id == current_user.id
-            and models.Post.title.contains(search if search else "")
-        )
+        .filter(models.Post.title.contains(search) if search else True)
         .limit(limit)
         .offset(skip)
         .all()

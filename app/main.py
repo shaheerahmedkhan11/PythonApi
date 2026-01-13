@@ -1,9 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 from fastapi.params import Body
 from fastapi.middleware.cors import CORSMiddleware
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import time
 from app import models
 from .database import engine, get_db
 from sqlalchemy.orm import Session
@@ -12,10 +9,12 @@ from typing import List
 from app.routers import posts, users, auth, votes
 
 
-models.Base.metadata.create_all(bind=engine)
+
 
 
 app = FastAPI()
+
+models.Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
