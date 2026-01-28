@@ -23,7 +23,7 @@ class ResponsePost(Post):
     created_at: datetime
     owner: "ResponseUser"
 
-    class Config:
+    class ConfigDict:
         from_attributes = True
 
 
@@ -31,7 +31,7 @@ class PostOut(BaseModel):
     Post: ResponsePost
     votes: int
 
-    class Config:
+    class ConfigDict:
         from_attributes = True
 
 
@@ -45,7 +45,7 @@ class ResponseUser(BaseModel):
     email: EmailStr
     created_at: datetime
 
-    class Config:
+    class ConfigDict:
         from_attributes = True
 
 
