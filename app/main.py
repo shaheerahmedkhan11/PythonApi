@@ -14,7 +14,6 @@ from app.routers import posts, users, auth, votes
 
 app = FastAPI()
 
-models.Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
