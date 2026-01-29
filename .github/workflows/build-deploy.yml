@@ -4,6 +4,22 @@ on: [push, pull_request]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: fastapi
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       DATABASE_HOSTNAME: localhost
       DATABASE_PORT: 5432
@@ -13,7 +29,6 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       ALGORITHM: HS256
       ACCESS_TOKEN_EXPIRE_MINUTES: 30
-    runs-on: ubuntu-latest
     steps:
       - name: Pulling git repository
         uses: actions/checkout@v2
