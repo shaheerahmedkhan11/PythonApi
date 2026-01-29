@@ -14,9 +14,8 @@ from app.routers import posts, users, auth, votes
 
 app = FastAPI()
 
-@app.on_event("startup")
-def startup_event():
-    models.Base.metadata.create_all(bind=engine)
+
+models.Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
