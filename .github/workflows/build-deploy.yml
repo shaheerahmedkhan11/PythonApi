@@ -20,7 +20,7 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASE_HOSTNAME: localhost # ✅ service name
+      DATABASE_HOSTNAME: localhost 
       DATABASE_PORT: 5432
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
